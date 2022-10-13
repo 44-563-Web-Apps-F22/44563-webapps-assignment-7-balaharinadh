@@ -27,40 +27,40 @@
   
   
   
-  <script> 
+    <script> 
 
-    var myTime=undefined
-
-    function recordReact() {
-        myTime=Date.now()
-        console.log(myTime)
-    }
-
-    function startTime(){
-        var startCount=Math.floor(Math.random()*8)+2
-      for(let i=0;i<=startCount;i++){
-        setTimeout(()=>{
-        document.getElementById('countdown').innerHTML = "Countdown "+i
-        }, (startCount-i)*1000)
-      }
-
-      setTimeout(()=>{
-        checkTime()}, startCount*1000)
-
-    }
-
-    function checkTime(){   
-
-        if(myTime==undefined){
-            document.getElementById('target').innerHTML = "Too slow"
-        }       
-        else{
-            var buttonTime=Date.now()
-            document.getElementById('target').innerHTML = "Time was "+ (buttonTime-myTime)
+        var myTime=undefined
+    
+        function recordReact() {
+            myTime=Date.now()
+            console.log(myTime)
         }
-    }
-
-  </script>
-
-</body>
-</html>
+    
+        function startTime(){
+            var startCount=Math.floor(Math.random()*8)+2
+          for(let i=0;i<=startCount;i++){
+            setTimeout(()=>{
+            document.getElementById('countdown').innerHTML = "Countdown "+i
+            }, (startCount-i)*1000)
+          }
+    
+          setTimeout(()=>{
+            checkTime()}, startCount*1000)
+    
+        }
+    
+        function checkTime(){   
+    
+            if(myTime==undefined){
+                document.getElementById('target').innerHTML = "Too slow"
+            }       
+            else{
+                var buttonTime=Date.now()
+                document.getElementById('target').innerHTML = "Time was "+ (buttonTime-myTime)
+            }
+        }
+    
+      </script>
+    
+    </body>
+    </html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html> <head> <style>
+    .flex-container {
+      display: flex;  flex-direction:row;
+      background-color: rgb(0, 255, 34);
+  }
+
+.flex-container > div {  /div children of the flex container/
+  background-color: #f1f1f1; 
+  margin: 10px;  padding: 20px;  font-size: 30px;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) { 
+	 .flex-container{
+		 flex-direction:column;
+		 background-color: rgb(128, 0, 26);
+	  }
+	}
+</style>
+<title>cycler page</title>
+</head>
+<body>
+
+    <h1>Bala Harinadh Palavelli builds a cycler</h1>
+
+
+	<div class="flex-container" id="target">
+        <div class="cycler">row item 1</div>   
+        <div class="cycler">row item 2</div>  
+        <div class="cycler">row item 3</div>  
+    </div>	
+	
+	<p> Press the button to create a new element of type div and then add it to the container.</p>
+	
+    <div>
+        <input type="text" id="value">
+    </div>
+    <br>
+
+    <button onclick="makeNewDiv()">Add value</button>
+
+    <button onclick="get()">Get</button>
+
+    <button onclick="spin()">Spin</button>
+
+    <button onclick="swap()">Swap</button>
+	
+	
+</body>
+<script>
+	function makeNewDiv(){
+		/* make the div and its text */
+		let element = document.createElement("div")
+        element.className="cycler"
+		element.innerHTML = document.getElementById("value").value
+		element.style.color = "orange"
+
+		/* add it to the container */
+		let container = document.getElementById('target')
+		container.appendChild(element)
+		
+	}
+
+    function get(){
+        var cyclerItems=document.getElementsByClassName("cycler")
+        var length=cyclerItems.length
+        if(length>0){
+            cyclerItems[length-1].remove()
+        }
+        
+    }
+
+    function spin(){
+        var cyclerItems=document.getElementsByClassName("cycler")
+        var length=cyclerItems.length
+        if(length>1){
+            
+            removedItem=document.createElement("div")
+            removedItem.innerHTML=cyclerItems[length-1].textContent
+            removedItem.className="cycler"
+            cyclerItems[length-1].remove()
+            var container=document.getElementById("target")
+            container.insertBefore(removedItem,container.firstChild)
+        }
+    }
+
+    function swap(){
+        var cyclerItems=document.getElementsByClassName("cycler")
+        var length=cyclerItems.length
+        var first=Math.floor(Math.random()*(length-1))
+        var second=Math.floor(Math.random()*(length-1))
+
+        if(first==second){
+            second+=1
+        }
+
+        if(length==2){
+            swapElement=document.createElement("div")
+            swapElement.innerHTML=cyclerItems[1].textContent
+            swapElement.className="cycler"
+            cyclerItems[1].remove()
+            var container=document.getElementById("target")
+            container.insertBefore(swapElement,container.firstChild)
+        }
+
+        else if(length>2){
+            swap1=document.createElement("div")
+            swap1.innerHTML=cyclerItems[first].textContent
+            swap1.className="cycler"
+            swap1.style.color="green"
+
+            swap2=document.createElement("div")
+            swap2.innerHTML=cyclerItems[second].textContent
+            swap2.className="cycler"
+            swap2.style.color="green"
+
+            cyclerItems[first].remove()
+            var container=document.getElementById("target")
+            container.insertBefore(swap1,cyclerItems[second-1])
+
+            cyclerItems[second].remove()
+            var container=document.getElementById("target")
+            container.insertBefore(swap2,cyclerItems[first])
+        }
+    }
+</script>
+</html>

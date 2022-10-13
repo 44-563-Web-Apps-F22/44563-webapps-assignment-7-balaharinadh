@@ -121,7 +121,7 @@
     <script>
         var ids=["img1","img2","img3","img4","img5","img6","img7","img8","img9","img10","img11","img12",
                 "img13","img14","img15","img16","img17","img18","img19","img20","img21","img22","img23","img24","img25"]
-        var chestCount=0
+        var chest=0
         var score=0
         var lastCheck=12
         var treasureLocation=18
@@ -136,10 +136,10 @@
                 document.getElementById(imageId).src="empty_treasure.png"
             }
 
-            chestCount++
+            chest++
             score++
 
-            document.getElementById("chests").innerHTML="checked chests "+chestCount
+            document.getElementById("chests").innerHTML="checked chests "+chest
             document.getElementById("Score").innerHTML="score is "+score
             lastCheck=position
 
@@ -147,35 +147,55 @@
 
         function help(){
 
-            var row = Math.floor(lastCheck/5)
-            var column=lastCheck%5
+      var row = Math.floor(lastCheck/5)
+      var column=lastCheck%5
 
-            if(row==3 && column==3){
-                document.getElementById("help").innerHTML="Sorry, no help available"
-            }
-            else if(row==3){
-                if(treasureLocation-lastCheck>0){
-                    document.getElementById("help").innerHTML="right"
-                }
-                else{
-                    document.getElementById("help").innerHTML="left"
-                }
-            }
-            else if(column==3){
-                if(treasureLocation-lastCheck>0){
-                    document.getElementById("help").innerHTML="down"
-                }
-                else{
-                    document.getElementById("help").innerHTML="up"
-                }
-            }
-            else{
-                document.getElementById("help").innerHTML="Sorry, no help available"
-            }
+      var treasureRow = Math.floor(treasureLocation/5)
+      var treasureColumn = treasureLocation%5
+
+       if(row==treasureRow && column==treasureColumn){
+       document.getElementById("help").innerHTML="Already, won the game. Sorry, no help available"
+       }
+     else if(row==treasureRow){
+     if(treasureLocation-lastCheck>0){
+        document.getElementById("help").innerHTML="right"
+     }
+    else{
+        document.getElementById("help").innerHTML="left"
+    }
+   }
+   else if(column==treasureColumn){
+    if(treasureLocation-lastCheck>0){
+        document.getElementById("help").innerHTML="down"
+    }
+    else{
+        document.getElementById("help").innerHTML="up"
+    }
+   } 
+   else{
+    document.getElementById("help").innerHTML="Sorry, no help available"
+    }
             score+=2
             document.getElementById("Score").innerHTML="score is "+score
 
         }
+
+   function bonusGame(){
+            chestCount=0
+            score=0
+            treasureLocation=Math.floor(Math.random()*24)
+            if(treasureLocation==12){
+                treasureLocation=12+Math.floor(Math.random()*12)
+            }
+            document.getElementById("chests").innerHTML="Number of chests checked is zero "
+            document.getElementById("Score").innerHTML="Score is unknown"
+
+            for (var i = 0; i <= 24; i++) {
+               if(i != 12)
+                  document.getElementById(ids[i]).src = "treasureclose.png"
+            }
+
+        }
     </script>
-   </body>
-   </html> 
+</body>
+</html>
